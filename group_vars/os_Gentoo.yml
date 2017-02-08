@@ -1,0 +1,11 @@
+---
+gitpkg: dev-vcs/git
+ctools:
+  - gcc
+  - make
+  - net-misc/curl
+rubybuilddeps:
+  - openssl
+  - readline
+  - zlib
+  - gdbm

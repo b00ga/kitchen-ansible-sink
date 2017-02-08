@@ -1,0 +1,40 @@
+---
+- hosts: all
+  vars:
+    rubyversion: 2.3.3
+    make: make
+  tasks:
+#    - group_by: key=os_{{ ansible_system }}
+    - group_by: key=os_{{ ansible_os_family }}
+    - group_by: key=dist_{{ ansible_distribution }}
+#    - group_by: key=os_{{ ansible_distribution }}_{{ ansible_distribution_major_version }}
+
+    - name: Install C compiler and tools
+      package: name="{{ item }}" state=present
+      #package: name="{{ item }}" state=present use=pkg5
+      with_items: "{{ ctools }}"
+
+    - name: Install git
+      package: name="{{ gitpkg }}" state=present
+
+    - name: /usr/local/source directory
+      file: path=/usr/local/source state=directory owner=root mode=0755
+
+    - name: Fetch ruby-build repo
+      git:
+        repo: https://github.com/rbenv/ruby-build.git
+        dest: /usr/local/source/ruby-build
+
+    - name: Install ruby build dependencies
+      package: name="{{ item }}" state=present
+      with_items: "{{ rubybuilddeps }}"
+
+#    - name: Build and install ruby {{ rubyversion }}
+#      shell: /usr/local/source/ruby-build/bin/ruby-build "{{ rubyversion }}" /usr/local/ruby/"{{ rubyversion }}" creates=/usr/local/ruby/{{ rubyversion }}/bin/ruby
+#      environment:
+#        CONFIGURE_OPTS: --disable-install-doc --with-out-ext=tcl --with-out-ext=tk
+#        RUBY_BUILD_BUILD_PATH: /var/tmp/ruby-build
+#        MAKE: "{{ make }}"
+#
+#    - name: Create /usr/local/ruby/kitchen symlink
+#      file: src=/usr/local/ruby/{{ rubyversion }} dest=/usr/local/ruby/kitchen state=link

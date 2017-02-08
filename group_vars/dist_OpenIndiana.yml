@@ -1,0 +1,7 @@
+---
+gitpkg: developer/versioning/git
+ctools:
+  - developer/gcc-49
+  - developer/build/gnu-make
+rubybuilddeps:
+  - shell/bash

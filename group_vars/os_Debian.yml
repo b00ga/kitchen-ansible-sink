@@ -1,0 +1,10 @@
+---
+gitpkg: git
+ctools:
+  - gcc
+  - make
+rubybuilddeps:
+  - libssl-dev 
+  - libreadline-dev 
+  - zlib1g-dev 
+  - libgdbm-dev

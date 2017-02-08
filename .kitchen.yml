@@ -1,0 +1,165 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: ansible_playbook
+  hosts: all
+  require_chef_for_busser: false
+
+transport:
+  name: ssh
+  max_ssh_sessions: 2
+
+platforms:
+  - name: bento/centos-7.3
+  - name: bento/centos-6.8
+  - name: box-cutter/fedora25
+  - name: box-cutter/fedora24
+  - name: box-cutter/ubuntu1204
+  - name: box-cutter/ubuntu1404
+  - name: box-cutter/ubuntu1604
+  - name: box-cutter/ubuntu1610
+  - name: bento/debian-8.6
+    provisioner:
+      require_pip: true
+      ansible_version: '2.1.2.0'
+  - name: bento/debian-7.11
+    provisioner:
+      require_pip: true
+      ansible_version: '2.1.2.0'
+  - name: bento/opensuse-leap-42.1
+    provisioner:
+      python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.1/devel:languages:python.repo
+      ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.1/systemsmanagement.repo
+#  - name: Mitsutoshi-NAKANO/tumbleweed-ja
+  - name: opensuse/openSUSE-Tumbleweed-x86_64
+  - name: maier/alpine-3.4-x86_64
+    driver:
+      vm_hostname: false
+      cache_directory: false
+#      synced_folders:
+#        - [ "shared-folder", "/vagrant", "disabled: true"]
+  - name: ogarcia/archlinux-x64
+    driver:
+      synced_folders:
+        - [ "shared-folder", "/vagrant" ]
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_arch.sh
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2"'
+  - name: cmiles/gentoo-amd64-minimal
+    driver:
+      customize:
+        memory: 8192
+        cpus: 4
+      provision: true
+      synced_folders:
+        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
+      cache_directory: false
+      vagrantfiles:
+        - Vagrantfile-GentooPreFlight.rb
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_gentoo.sh
+  - name: kaorimatz/freebsd-11.0-amd64
+    driver:
+      synced_folders:
+        - [ "shared-folder", "/vagrant", "type: :rsync"]
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_freebsd.sh
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: kaorimatz/freebsd-10.3-amd64
+    driver:
+      synced_folders:
+        - [ "shared-folder", "/vagrant", "type: :rsync"]
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_freebsd.sh
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: kaorimatz/openbsd-6.0-amd64
+    driver:
+      synced_folders:
+        - [ "shared-folder", "/vagrant", "type: :rsync"]
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_openbsd.sh
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: kaorimatz/openbsd-5.9-amd64
+    driver:
+      synced_folders:
+        - [ "shared-folder", "/vagrant", "type: :rsync"]
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_openbsd.sh
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+#  - name: kja/netbsd-7-amd64 
+#    driver:
+#      synced_folders:
+#        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
+#      provision: true
+#      cache_directory: false
+#      vagrantfiles:
+#        - Vagrantfile-NetBSDPreFlight.rb
+#    provisioner:
+#      require_ansible_omnibus: true
+#      ansible_omnibus_url: file:///vagrant/ansible_install_netbsd.sh
+#      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: Kralian/NetBSD_7.0_amd64
+    driver:
+      synced_folders:
+        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
+      provision: true
+      cache_directory: false
+      vagrantfiles:
+        - Vagrantfile-NetBSDPreFlight.rb
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_netbsd.sh
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: Kralian/netbsd_6.1.5_amd64
+    driver:
+      synced_folders:
+        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
+      provision: true
+      cache_directory: false
+      vagrantfiles:
+        - Vagrantfile-NetBSDPreFlight.rb
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_netbsd.sh
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: b00ga/dragonfly46-hammer
+    driver:
+      vm_hostname: false
+      cache_directory: false
+      synced_folders:
+        - [ "shared-folder", "/home/vagrant/vbox-shared", "type: :rsync"]
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///home/vagrant/vbox-shared/ansible_install_freebsd.sh
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+  - name: hisa_x/oi-hipster-2016.10
+    driver:
+      vm_hostname: false
+      synced_folders:
+        - [ "shared-folder", "/tmp/vbox-shared", "type: :rsync"]
+#    provisioner:
+#      require_ansible_omnibus: true
+#      ansible_omnibus_url: file:///vagrant/ansible_install_openindiana.sh
+  - name: kaorimatz/omnios-r151018
+    driver:
+      synced_folders:
+        - [ "shared-folder", "/vagrant", "type: :rsync"]
+    provisioner:
+      require_ansible_omnibus: true
+      ansible_omnibus_url: file:///vagrant/ansible_install_omnios.sh
+
+suites:
+  - name: default
+
+verifier:
+  ruby_bindir: /usr/local/ruby/kitchen/bin
+  name: shell
+  command: ansible -i localhost, -c local -m setup all
