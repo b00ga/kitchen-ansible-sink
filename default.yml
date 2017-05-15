@@ -9,6 +9,12 @@
     - group_by: key=dist_{{ ansible_distribution }}
 #    - group_by: key=os_{{ ansible_distribution }}_{{ ansible_distribution_major_version }}
 
+    - include: "{{ item }}"
+      with_first_found:
+        - files:
+            - tasks/os_{{ ansible_os_family }}.yml
+          skip: true
+
     - name: Install C compiler and tools
       package: name="{{ item }}" state=present
       #package: name="{{ item }}" state=present use=pkg5
