@@ -29,16 +29,16 @@ platforms:
     provisioner:
       require_pip: true
       ansible_version: '2.3.0.0'
-  - name: bento/opensuse-leap-42.1
+  - name: bento/opensuse-leap-42.2
     provisioner:
-      python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.1/devel:languages:python.repo
-      ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.1/systemsmanagement.repo
+      python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.2/devel:languages:python.repo
+      ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.2/systemsmanagement.repo
 #  - name: Mitsutoshi-NAKANO/tumbleweed-ja
   - name: opensuse/openSUSE-Tumbleweed-x86_64
     provisioner:
       python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Tumbleweed/devel:languages:python.repo
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Tumbleweed/systemsmanagement.repo
-  - name: maier/alpine-3.4-x86_64
+  - name: maier/alpine-3.5-x86_64
     driver:
       vm_hostname: false
       cache_directory: false
