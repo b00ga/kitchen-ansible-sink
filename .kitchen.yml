@@ -6,6 +6,7 @@ provisioner:
   name: ansible_playbook
   hosts: all
   require_chef_for_busser: false
+  sudo_command: sudo -E -H
 
 transport:
   name: ssh
@@ -23,11 +24,11 @@ platforms:
   - name: bento/debian-8.7
     provisioner:
       require_pip: true
-      ansible_version: '2.1.2.0'
+      ansible_version: '2.3.0.0'
   - name: bento/debian-7.11
     provisioner:
       require_pip: true
-      ansible_version: '2.1.2.0'
+      ansible_version: '2.3.0.0'
   - name: bento/opensuse-leap-42.1
     provisioner:
       python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.1/devel:languages:python.repo
