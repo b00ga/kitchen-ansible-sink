@@ -35,6 +35,9 @@ platforms:
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.1/systemsmanagement.repo
 #  - name: Mitsutoshi-NAKANO/tumbleweed-ja
   - name: opensuse/openSUSE-Tumbleweed-x86_64
+    provisioner:
+      python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Tumbleweed/devel:languages:python.repo
+      ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Tumbleweed/systemsmanagement.repo
   - name: maier/alpine-3.4-x86_64
     driver:
       vm_hostname: false
