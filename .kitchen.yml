@@ -162,4 +162,5 @@ suites:
 verifier:
   ruby_bindir: /usr/local/ruby/kitchen/bin
   name: shell
+  remote_exec: true
   command: ansible -i localhost, -c local -m setup all
