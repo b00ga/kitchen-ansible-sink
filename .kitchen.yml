@@ -52,20 +52,28 @@ platforms:
       require_ansible_omnibus: true
       ansible_omnibus_url: file:///vagrant/ansible_install_arch.sh
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2"'
-  - name: cmiles/gentoo-amd64-minimal
+  - name: symbols/gentoo-minimal 
     driver:
-      customize:
-        memory: 8192
-        cpus: 4
-      provision: true
       synced_folders:
-        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
-      cache_directory: false
-      vagrantfiles:
-        - Vagrantfile-GentooPreFlight.rb
+        - [ "shared-folder", "/vagrant" ]
     provisioner:
       require_ansible_omnibus: true
-      ansible_omnibus_url: file:///vagrant/ansible_install_gentoo.sh
+      ansible_omnibus_url: file:///vagrant/ansible_install_gentoo-symbols.sh
+      custom_pre_install_command: sudo /usr/bin/eselect python set python2.7
+#  - name: cmiles/gentoo-amd64-minimal
+#    driver:
+#      customize:
+#        memory: 8192
+#        cpus: 4
+#      provision: true
+#      synced_folders:
+#        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
+#      cache_directory: false
+#      vagrantfiles:
+#        - Vagrantfile-GentooPreFlight.rb
+#    provisioner:
+#      require_ansible_omnibus: true
+#      ansible_omnibus_url: file:///vagrant/ansible_install_gentoo.sh
   - name: kaorimatz/freebsd-11.0-amd64
     driver:
       synced_folders:
