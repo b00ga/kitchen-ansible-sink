@@ -13,14 +13,14 @@ transport:
 
 platforms:
   - name: bento/centos-7.3
-  - name: bento/centos-6.8
+  - name: bento/centos-6.9
   - name: box-cutter/fedora25
   - name: box-cutter/fedora24
-  - name: box-cutter/ubuntu1204
   - name: box-cutter/ubuntu1404
   - name: box-cutter/ubuntu1604
   - name: box-cutter/ubuntu1610
-  - name: bento/debian-8.6
+  - name: ubuntu/zesty64
+  - name: bento/debian-8.7
     provisioner:
       require_pip: true
       ansible_version: '2.1.2.0'
