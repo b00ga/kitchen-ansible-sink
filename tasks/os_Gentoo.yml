@@ -1,0 +1,16 @@
+---
+# Perl parts of git want to pull in Perl modules that want the latest perl
+- name: Update perl
+  package: name="perl" state=latest
+
+# Perls modules that are needed to get Git built
+- name: Install perl modules
+  package: 
+    name: "{{ perldeps }}"
+    state: latest
+  with_items:
+    - dev-perl/Module-Build
+    - dev-perl/libintl-perl
+  loop_control:
+    loop_var: perldeps
+
