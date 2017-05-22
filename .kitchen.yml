@@ -8,6 +8,8 @@ provisioner:
   require_chef_for_busser: false
   sudo_command: sudo -E -H
   additional_copy_path: tasks
+#  ansible_verbose: true
+#  ansible_verbosity: 3
 
 transport:
   name: ssh
@@ -107,42 +109,28 @@ platforms:
       require_ansible_omnibus: true
       ansible_omnibus_url: file:///vagrant/ansible_install_openbsd.sh
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
-#  - name: kja/netbsd-7-amd64 
-#    driver:
-#      synced_folders:
-#        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
-#      provision: true
-#      cache_directory: false
-#      vagrantfiles:
-#        - Vagrantfile-NetBSDPreFlight.rb
-#    provisioner:
-#      require_ansible_omnibus: true
-#      ansible_omnibus_url: file:///vagrant/ansible_install_netbsd.sh
-#      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
   - name: Kralian/NetBSD_7.0_amd64
     driver:
       synced_folders:
         - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
-      provision: true
-      cache_directory: false
-      vagrantfiles:
-        - Vagrantfile-NetBSDPreFlight.rb
     provisioner:
       require_ansible_omnibus: true
       ansible_omnibus_url: file:///vagrant/ansible_install_netbsd.sh
-      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
+      custom_pre_install_command: sudo ln -s /usr/pkg/bin/curl /usr/bin/curl
+      sudo_command: /usr/pkg/bin/sudo
   - name: Kralian/netbsd_6.1.5_amd64
     driver:
       synced_folders:
         - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
-      provision: true
-      cache_directory: false
-      vagrantfiles:
-        - Vagrantfile-NetBSDPreFlight.rb
+      ssh:
+        shell: "/bin/sh"
     provisioner:
       require_ansible_omnibus: true
       ansible_omnibus_url: file:///vagrant/ansible_install_netbsd.sh
-      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/bin/env python2.7"'
+      ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
+      custom_pre_install_command: sudo ln -s /usr/pkg/bin/python2.7 /usr/bin/python
+      sudo_command: /usr/pkg/bin/sudo
   - name: b00ga/dragonfly46-hammer
     driver:
       vm_hostname: false
