@@ -1,0 +1,7 @@
+---
+- name: Git symlink
+  file:
+   src: /opt/local/bin/git
+   dest: /usr/bin/git
+   state: link
+   force: yes

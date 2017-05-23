@@ -16,12 +16,17 @@
           skip: true
 
     - name: Install C compiler and tools
-      package: name="{{ item }}" state=present
-      #package: name="{{ item }}" state=present use=pkg5
+      package: 
+        name: "{{ item }}" 
+        state: present
+        use: "{% if ansible_distribution == 'OpenIndiana' %}pkg5{% else %}auto{% endif %}"
       with_items: "{{ ctools }}"
 
     - name: Install git
-      package: name="{{ gitpkg }}" state=present
+      package: 
+        name: "{{ gitpkg }}" 
+        state: present
+        use: "{% if ansible_distribution == 'OpenIndiana' %}pkgin{% else %}auto{% endif %}"
 
     - name: /usr/local/source directory
       file: path=/usr/local/source state=directory owner=root mode=0755
@@ -32,7 +37,10 @@
         dest: /usr/local/source/ruby-build
 
     - name: Install ruby build dependencies
-      package: name="{{ item }}" state=present
+      package: 
+        name: "{{ item }}" 
+        state: present
+        use: "{% if ansible_distribution == 'OpenIndiana' %}pkg5{% else %}auto{% endif %}"
       with_items: "{{ rubybuilddeps }}"
 
 #    - name: Build and install ruby {{ rubyversion }}

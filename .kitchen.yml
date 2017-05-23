@@ -8,8 +8,8 @@ provisioner:
   require_chef_for_busser: false
   sudo_command: sudo -E -H
   additional_copy_path: tasks
-#  ansible_verbose: true
-#  ansible_verbosity: 3
+  ansible_verbose: true
+  ansible_verbosity: 3
 
 transport:
   name: ssh
@@ -144,11 +144,8 @@ platforms:
   - name: hisa_x/oi-hipster-2016.10
     driver:
       vm_hostname: false
-      synced_folders:
-        - [ "shared-folder", "/tmp/vbox-shared", "type: :rsync"]
-#    provisioner:
-#      require_ansible_omnibus: true
-#      ansible_omnibus_url: file:///vagrant/ansible_install_openindiana.sh
+    provisioner:
+      custom_pre_install_command: sudo -- curl -s -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/bootstrap-2017Q1-x86_64.tar.gz  && sudo -- gtar -zxpf bootstrap-2017Q1-x86_64.tar.gz -C / && sudo -- /opt/local/bin/pkgin -y update && sudo -- /opt/local/bin/pkgin -y install ansible && sudo -- ln -s /opt/local/bin/ansible /usr/bin/ansible && sudo -- ln -s /opt/local/bin/ansible-playbook /usr/bin/ansible-playbook
   - name: kaorimatz/omnios-r151018
     driver:
       synced_folders:

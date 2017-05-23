@@ -1,7 +1,6 @@
 ---
-gitpkg: developer/versioning/git
+gitpkg: git
 ctools:
-  - developer/gcc-49
   - developer/build/gnu-make
 rubybuilddeps:
   - shell/bash
