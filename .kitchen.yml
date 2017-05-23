@@ -36,7 +36,6 @@ platforms:
     provisioner:
       python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_42.2/devel:languages:python.repo
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Leap_42.2/systemsmanagement.repo
-#  - name: Mitsutoshi-NAKANO/tumbleweed-ja
   - name: opensuse/openSUSE-Tumbleweed-x86_64
     provisioner:
       python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Tumbleweed/devel:languages:python.repo
@@ -45,8 +44,6 @@ platforms:
     driver:
       vm_hostname: false
       cache_directory: false
-#      synced_folders:
-#        - [ "shared-folder", "/vagrant", "disabled: true"]
   - name: ogarcia/archlinux-x64
     driver:
       synced_folders:
@@ -63,20 +60,6 @@ platforms:
       require_ansible_omnibus: true
       ansible_omnibus_url: file:///vagrant/ansible_install_gentoo-symbols.sh
       custom_pre_install_command: sudo /usr/bin/eselect python set python2.7
-#  - name: cmiles/gentoo-amd64-minimal
-#    driver:
-#      customize:
-#        memory: 8192
-#        cpus: 4
-#      provision: true
-#      synced_folders:
-#        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
-#      cache_directory: false
-#      vagrantfiles:
-#        - Vagrantfile-GentooPreFlight.rb
-#    provisioner:
-#      require_ansible_omnibus: true
-#      ansible_omnibus_url: file:///vagrant/ansible_install_gentoo.sh
   - name: kaorimatz/freebsd-11.0-amd64
     driver:
       synced_folders:
