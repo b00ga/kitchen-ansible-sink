@@ -105,7 +105,7 @@ platforms:
   - name: Kralian/netbsd_6.1.5_amd64
     driver:
       synced_folders:
-        - [ "shared-folder", "/vagrant", "group: 'users', type: :rsync" ]
+        - [ "shared-folder", "/home/vagrant/vbox-shared", "group: 'users', type: :rsync"]
       ssh:
         shell: "/bin/sh"
     provisioner:
