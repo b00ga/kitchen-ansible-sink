@@ -1,5 +1,5 @@
 ---
-gitpkg: git
+gitpkg: git-base
 ctools:
   - gcc49
   - gmake

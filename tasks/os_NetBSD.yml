@@ -1,14 +1,12 @@
 ---
-# Git requires perl be updated to the latest
-- name: Update all packages to latest
-  pkgin:
-    full_upgrade: yes
+- name: Check if root CA certs are already installed
+  find:
+    paths: "/etc/openssl/certs"
+    file_type: file
+    recurse: no
+    patterns: "*.pem"
+  register: certsdir
 
-# Git can't download https urls without root ca store
-- name: Install root certs package
-  pkgin:
-    name: "mozilla-rootcerts"
-    state: present
 - name: Install root CA certificates
   command: /usr/pkg/sbin/mozilla-rootcerts install
-
+  when: certsdir.matched|int == 0
