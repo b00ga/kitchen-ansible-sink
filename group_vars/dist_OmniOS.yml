@@ -1,7 +1,0 @@
----
-gitpkg: developer/versioning/git
-ctools:
-  - developer/gcc51
-  - developer/build/gnu-make
-rubybuilddeps:
-  - shell/bash

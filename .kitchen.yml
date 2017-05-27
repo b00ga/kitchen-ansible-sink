@@ -127,13 +127,6 @@ platforms:
       vm_hostname: false
     provisioner:
       custom_pre_install_command: sudo -- curl -s -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/bootstrap-2017Q1-x86_64.tar.gz  && sudo -- gtar -zxpf bootstrap-2017Q1-x86_64.tar.gz -C / && sudo -- /opt/local/bin/pkgin -y update && sudo -- /opt/local/bin/pkgin -y install ansible && sudo -- ln -s /opt/local/bin/ansible /usr/bin/ansible && sudo -- ln -s /opt/local/bin/ansible-playbook /usr/bin/ansible-playbook
-  - name: kaorimatz/omnios-r151018
-    driver:
-      synced_folders:
-        - [ "shared-folder", "/vagrant", "type: :rsync"]
-    provisioner:
-      require_ansible_omnibus: true
-      ansible_omnibus_url: file:///vagrant/ansible_install_omnios.sh
 
 suites:
   - name: default
