@@ -40,7 +40,7 @@ platforms:
     provisioner:
       python_sles_repo: http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Tumbleweed/devel:languages:python.repo
       ansible_sles_repo: http://download.opensuse.org/repositories/systemsmanagement/openSUSE_Tumbleweed/systemsmanagement.repo
-  - name: maier/alpine-3.5-x86_64
+  - name: maier/alpine-3.6-x86_64
     driver:
       vm_hostname: false
       cache_directory: false
