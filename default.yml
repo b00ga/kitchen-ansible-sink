@@ -19,14 +19,14 @@
       package: 
         name: "{{ item }}" 
         state: present
-        use: "{% if ansible_distribution == 'OpenIndiana' %}pkg5{% else %}auto{% endif %}"
+        use: "{% if ansible_distribution == 'OpenIndiana' %}pkg5{% elif ansible_distribution == 'Solaris' %}pkgutil{% else %}auto{% endif %}"
       with_items: "{{ ctools }}"
 
     - name: Install git
       package: 
         name: "{{ gitpkg }}" 
         state: present
-        use: "{% if ansible_distribution == 'OpenIndiana' %}pkgin{% else %}auto{% endif %}"
+        use: "{% if ansible_distribution == 'OpenIndiana' %}pkgin{% elif ansible_distribution == 'Solaris' %}pkgutil{% else %}auto{% endif %}"
 
     - name: /usr/local/source directory
       file: path=/usr/local/source state=directory owner=root mode=0755

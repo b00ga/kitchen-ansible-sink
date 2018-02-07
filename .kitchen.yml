@@ -112,7 +112,7 @@ platforms:
       ansible_extra_flags: -e 'ansible_python_interpreter="/usr/pkg/bin/python2.7"'
       custom_pre_install_command: sudo ln -s /usr/pkg/bin/curl /usr/bin/curl
       sudo_command: /usr/pkg/bin/sudo
-  - name: b00ga/dragonfly46-hammer
+  - name: b00ga/dragonfly50
     driver:
       vm_hostname: false
       cache_directory: false
@@ -127,6 +127,16 @@ platforms:
       vm_hostname: false
     provisioner:
       custom_pre_install_command: sudo -- curl -s -O https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/bootstrap-2017Q1-x86_64.tar.gz  && sudo -- gtar -zxpf bootstrap-2017Q1-x86_64.tar.gz -C / && sudo -- /opt/local/bin/pkgin -y update && sudo -- /opt/local/bin/pkgin -y install ansible && sudo -- ln -s /opt/local/bin/ansible /usr/bin/ansible && sudo -- ln -s /opt/local/bin/ansible-playbook /usr/bin/ansible-playbook
+  - name: plaurin/solaris-11_3
+    driver:
+      ssh:
+        password: 1vagrant
+    provisioner:
+###      custom_pre_install_command: echo action=nocheck > /tmp/opencsw-resp.txt && sudo -- /usr/sbin/pkgadd -d http://get.opencsw.org/now -a /tmp/opencsw-resp.txt -n all && sudo -- /opt/csw/bin/pkgutil -U && sudo -- /opt/csw/bin/pkgutil -i -y ansible && sudo -- ln -s /opt/csw/bin/ansible-playbook /usr/bin/ansible-playbook
+      custom_pre_install_command: sudo pkg install gcc-c++ && sudo ln -s /usr/bin/gcc /usr/bin/cc && echo action=nocheck > /tmp/opencsw-resp.txt && sudo -- /usr/sbin/pkgadd -d http://get.opencsw.org/now -a /tmp/opencsw-resp.txt -n all && sudo -- /opt/csw/bin/pkgutil -U  && /opt/csw/bin/pkgutil -i -y libffi_dev && sudo CFLAGS="-I/usr/lib/libffi-3.0.9/include/ -m32 -fno-stack-protector" pip install ansible
+#  - name: ghprince/solaris-10-u11-x86
+#  - name: AndrewDryga/vagrant-box-osx 
+#  - name: chusiang/win10-x64-ansible
 
 suites:
   - name: default
